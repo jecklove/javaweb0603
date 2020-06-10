@@ -1,0 +1,70 @@
+Servlet：
+	1.基本概念：
+		动态web开发技术之一，本质上是一个java类，可以运行在服务器端的程序。
+	2.作用：
+		接收用户请求，处理业务逻辑，生成动态的web内容。
+	3.使用：
+		1.编写一个类
+			1.继承HttpServlet类
+			2.重写doGet方法、doPost方法。
+		2.编写配置文件web.xml
+			1.注册servlet
+				<servlet>
+				  	<servlet-name>servlet别名</servlet-name>
+				  	<servlet-class>servlet类全限定名</servlet-class>
+  				</servlet>
+  				
+			2.绑定请求路径
+				<servlet-mapping>
+				  	<servlet-name>servlet别名</servlet-name>
+				  	<url-pattern>/请求路径</url-pattern>
+  				</servlet-mapping>
+  				注意：url-pattern多种配置方式：
+  					1.完全匹配，必须以“/”开始，例如：/hello、/a/b
+  					2.目录匹配，必须以“/”开始，以“*”结尾，例如：/a/*、/*
+  					3.后缀名匹配，以“*”开始，以各种字符结尾，例如：*.jsp
+  					4.优先级：完全匹配 > 目录匹配 > 后缀名匹配
+  					
+  			3.访问请求路径
+  				http://主机地址:端口号/项目根路径/请求路径
+  				
+  		3.web3.0以后可以使用注解配置		
+  			直接在servlet类上加注解@WebServlet("/请求路径")。
+  			该注解实现类servlet的注册和映射。
+  			
+  	4.servlet的生命周期（非常重要）
+  		1.servlet的体系结构
+  			
+  			Servlet接口
+  				  |
+  			GenericServlet抽象类
+  				  |
+  			HttpServlet抽象类
+  				  |
+  			自定义servlet
+  			
+  			Servlet接口常用方法：
+  				void init(ServletConfig config)：初始化
+  				void service(ServletRequest req, ServletResponse res)：服务
+  				void destroy()：销毁
+  			
+  			GenericServlet抽象类：
+  				除了service方法没有做实现，其他方法都做了实现。
+  				
+  			HttpServlet抽象类：
+  				对service方法做了实现，判断请求方式，根据不同的请求方式调用对应的方法。
+  	
+  			自定义servlet：
+  				需要实现HttpServlet中未实现的各种请求处理方法，例如doGet和doPost。
+  				
+  		2.servlet生命周期
+  			init：执行时机：第一次访问；执行次数：一次
+  			service：执行时机：每次接收到请求；执行次数：请求一次执行一次
+  			destory：执行时机：服务器正常关闭时；执行次数：一次
+  	
+  	
+  	
+  	
+  	
+  		
+  				
